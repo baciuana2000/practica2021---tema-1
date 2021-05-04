@@ -20,5 +20,8 @@ class AdminSeeder extends Seeder
             'email' => 'admin@admin.ro',
             'password' => Hash::make('parola')
         ]);
+
+    
+
     }
 }

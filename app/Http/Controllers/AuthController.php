@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +37,31 @@ class AuthController extends Controller
     {
         //TODO
         if ($request->isMethod('post')) {
-            //validate request
-            //create user
+            
             // login user or send activate email
-            //redirected to dashboard/login
+ 
+          //validate request  -- done
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+               
+            //create user -- done
+              
+                    $user = new User ;
+                    $user->name = $request->name;
+                    $user->email = $request->email;
+                    $user->password = $request->password;
+                    $user->save();
+                
+               
+              //redirected to dashboard/login -- done
+            return redirect('/dashboard');
         }
 
-        //return view register
-        return 'REGISTER';
+        //return view register -- done
+     
+      return view('auth/register');
     }
 }
