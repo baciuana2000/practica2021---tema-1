@@ -13,6 +13,14 @@
 
       <form action="{{url('/forgot_password')}}" method="post">
       @csrf
+      @if(session('error'))
+         <div>   {{ session('error')}} </div>
+
+        @endif
+        @if(session('success'))
+        <div>   {{ session('success')}} </div>
+
+        @endif
         <div class="input-group mb-3">
           <input name="email" type="email" class="form-control" placeholder="Email" >
           <div class="input-group-append">
@@ -30,10 +38,10 @@
       </form>
 
       <p class="mt-3 mb-1">
-        <a href="login.html">Login</a>
+        <a href="{{route('login')}}">Login</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{route('register')}}" class="text-center">Register a new membership</a>
       </p>
     </div>
     <!-- /.login-card-body -->
