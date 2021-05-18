@@ -153,7 +153,7 @@
                 </form>
                 <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
+            <!-- /.modal-dialog  users -->
         </div>
 
         <div class="modal fade" id="userEditModalAjax">

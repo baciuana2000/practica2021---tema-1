@@ -103,10 +103,11 @@
                 </ul>
             </div>
         </div>
-        <!-- /.card -->
+        <!-- /.card   boards -->
 
         <div class="modal fade" id="boardEditModal">
             <div class="modal-dialog">
+            
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit board</h4>
@@ -115,16 +116,30 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                    <div class="alert alert-danger hidden" id="boardEditAlert"></div>
+                    <div id="boardEditName"></div>
+
+               
+                             <input type="hidden" name="id" id="boardEditId" value="" />
+                             <input type="hidden" name="id" id="userID" value="" />
+
+                    <label for="editName">Name</label>
+                                         <input id="NumeEditBoard" type="text" class="form-control"  aria-label="Username"
+                                          aria-describedby="basic-addon1" name="NumeEditBoard" value="" >
+                                          <div class="form-group">
+               
+                 
 
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="boardEditButton">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="boardEditButton" >Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
 
+        
         <div class="modal fade" id="boardDeleteModal">
             <div class="modal-dialog">
                 <div class="modal-content">

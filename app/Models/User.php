@@ -131,4 +131,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasManyThrough(Task::class, Board::class, 'user_id', 'board_id', 'id', 'id');
     }
+
+   
 }

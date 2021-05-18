@@ -20,7 +20,7 @@ use Illuminate\Support\Carbon;
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read Collection|BoardUser[] $boardUsers
+ * @property-read Collection|BoardUser[] $boardUsers  
  * @property-read Collection|Task[] $tasks
  * @property-read User $user
  * @property-read Collection|User[] $users

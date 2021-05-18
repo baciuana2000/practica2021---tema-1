@@ -6,6 +6,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,15 +35,25 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware(['admin'])->group(function () {
-        Route::get('/users', [AdminController::class, 'users'])->name('users.all');
+        Route::get('/users', [AdminController::class, 'users'])->name('users.all'); 
         Route::post('/user/update', [AdminController::class, 'updateUser'])->name('users.update');
         Route::post('/user-update/{id}', [AdminController::class, 'updateUserAjax'])->name('users.update-ajax');
         Route::post('/user/delete/{id}', [AdminController::class, 'deleteUser'])->name('users.delete');
+        Route::post('/task-delete/{id}', [BoardController::class, 'deleteTaskAjax'])->name('task.delete');
+        Route::post('/delete/{id}', [BoardController::class, 'deleteBoard'])->name('boards.delete');
+       
     });
 
     Route::get('/boards', [BoardController::class, 'boards'])->name('boards.all');
     Route::post('/board/update/{id}', [BoardController::class, 'updateBoard'])->name('boards.update');
-    Route::post('/board/delete/{id}', [BoardController::class, 'deleteBoard'])->name('boards.delete');
+    Route::post('/delete/{id}', [BoardController::class, 'deleteBoard'])->name('boards.delete');
 
-    Route::get('/board/{id}', [BoardController::class, 'board'])->name('board.view');
+   // Route::get('/tasks', [BoardController::class, 'board'])->name('tasks.all'); 
+    Route::get('/board/{id}', [BoardController::class, 'board'])->name('board.view'); 
+    Route::post('/update-task/{id}', [BoardController::class, 'updateTaskAjax'])->name('task.update-task');
+    Route::post('/task-delete/{id}', [BoardController::class, 'deleteTaskAjax'])->name('task.delete');
+
+    
+ 
+
 });
