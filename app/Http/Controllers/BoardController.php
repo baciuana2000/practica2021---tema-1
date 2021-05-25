@@ -171,14 +171,15 @@ class BoardController extends Controller
         $tasks = $board->tasks()->oldest()->paginate(10);
 
         $boardUsers = $board->boardUsers()->with('user')->get();
-
+      
         return view(
             'boards.view',
             [
                 'board' => $board,
                 'boards' => $boards,
                 'tasks' => $tasks,
-                'boardUsers' => $boardUsers
+                'boardUsers' => $boardUsers ,
+                'userList' => User::select(['id', 'name'])->get()->toArray()
             ]
         );
     }
@@ -251,4 +252,52 @@ class BoardController extends Controller
 
         return response()->json(['error' => $error, 'success' => $success]);
     }
+
+
+     /**
+     * @param  Request  $request
+     *
+     * @return JsonResponse
+     */
+    public function createBoard(Request $request)
+    {
+        $boards = new Board();
+            $boardUser = new BoardUser();
+        $boards->name = $request->name;
+         $boards->user_id = $request->user;
+
+         $boards->save();
+
+        $boardUser->board_id = $boards->id;
+        $boardUser->user_id = $request->user;
+
+        $boardUser->save();
+
+
+        return response()->json($boards);
+
+    }
+
+     /**
+     * @param  Request  $request
+     *
+     * @return JsonResponse
+     */
+    public function createTask(Request $request)
+    {
+        $tasks = new Task();
+          
+        $tasks->name = $request->name;
+         $tasks->description = $request->description;
+         $tasks->assignment = $request->assignment;
+         $tasks->status = $request->status;
+         $tasks->board_id = $request->id;
+
+         $tasks->save();
+         
+        return response()->json($tasks);
+        
+
+    }
+
 }

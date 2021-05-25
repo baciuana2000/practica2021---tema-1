@@ -21,6 +21,17 @@ $('#userEditModalAjax').on('shown.bs.modal', function(event) {
     modal.find('#userEditRoleAjax').val(user.role);
 });
 
+$('#newBoardModal').on('shown.bs.modal', function(event) {
+    let button = $(event.relatedTarget); // Button that triggered the modal
+    let user = button.data('board');
+
+    let modal = $(this);
+
+    modal.find('#userEditIdAjax').val(user.id);
+    modal.find('#userEditNameAjax').text(user.name);
+    modal.find('#userEditRoleAjax').val(user.role);
+});
+
 $('#userDeleteModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
     let user = button.data('user');
@@ -49,6 +60,7 @@ $('#boardEditModal').on('shown.bs.modal', function(event) {
     modal.find('#boardEditUsers').val(usersSelected);
     modal.find('#boardEditUsers').trigger('change');
 });
+
 
 $('#boardDeleteModal').on('shown.bs.modal', function(event) {
     let button = $(event.relatedTarget); // Button that triggered the modal
@@ -125,6 +137,7 @@ $(document).ready(function() {
         window.location.href = '/board/' + id;
     });
 
+    
     $('#boardEditUsers').select2();
 
     $('#boardEditButton').on('click', function() {
@@ -205,6 +218,60 @@ $(document).ready(function() {
                 window.location.reload();
             }
         });
+    });
+
+    $('#newBoardButton').on('click', function() {
+        $('#newboardAlert').addClass('hidden');
+        let name = $('#addBoardName').val();
+        let user = $('#NewboardUser').val();
+       
+        console.log(name);
+        $.ajax({
+            method: 'POST',
+            url: '/board/create',
+            data: {name:name ,
+            user:user,
+         
+            }
+        }).done(function(response) {
+            if (response.error !== '') {
+               window.location.reload();
+            } else {
+               
+                $('#newboardAlert').text(response.error).removeClass('hidden');  
+            }
+        })
+       
+    });
+
+    $('#newTaskButton').on('click', function() {
+        $('#newTaskAlert').addClass('hidden');
+        let name = $('#addTaskName').val();
+        let description = $('#NewTaskDescription').val();
+        let assignment = $('#NewTaskAssignment').val();
+        
+        let id = $('#taskNewId').val();
+        //console.log(assignment);
+        let status = $('#NewTaskStatus').val();
+       // console.log(name);
+        $.ajax({
+            method: 'POST',
+            url: '/task/create',
+            data: {name:name ,
+                description:description,
+                assignment:assignment,
+                status:status,
+                id:id,
+            }
+        }).done(function(response) {
+            if (response.error !== '') {
+                window.location.reload();
+            } else {
+                
+                $('#newTaskAlert').text(response.error).removeClass('hidden'); 
+            }
+        })
+       
     });
 
 });

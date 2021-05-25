@@ -25,6 +25,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Boards list</h3>
+                <button style="float : right " class="btn btn-sm btn-success"
+                                                type="button"
+                                                data-board="{{json_encode($boards)}}"
+                                                data-toggle="modal"
+                                                data-target="#newBoardModal">
+                                            <i class="fas fa-edit"></i></button>
             </div>
 
             <div class="card-body">
@@ -163,6 +169,42 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+
+        <div class="modal fade" id="newBoardModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">New board</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      
+                        <div class="alert alert-danger hidden" id="newboardAlert"></div>
+                     
+                        <div class="form-group">
+                            <label for="addBoardName">Name</label>
+                            <input type="text" class="form-control" id="addBoardName" placeholder="Name" name="boardName">
+                        </div>
+                        <div class="form-group">
+                            <label for="NewboardUser">Board User</label>
+                            <select name="addNewBoardUser"  id="NewboardUser" style="width: 100%;">
+                                @foreach ($userList as $user)
+                                    <option value="{{$user['id']}}">{{$user['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="newBoardButton">Create board</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
 
     </section>
     <!-- /.content -->
